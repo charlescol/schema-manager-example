@@ -1,0 +1,34 @@
+name: Publish Schemas
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'schemas/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'schemas/**'
+
+jobs:
+  publish-schemas:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Publish Schemas
+        env:
+          SCHEMA_REGISTRY_URL: ${{ secrets.SCHEMA_REGISTRY_URL }}
+        run: yarn run publish-schemas

@@ -1,0 +1,19 @@
+{
+  "type": "record",
+  "name": "Data2",
+  "namespace": "topic2",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "type",
+      "type": "string"
+    },
+    {
+      "name": "value",
+      "type": "float"
+    }
+  ]
+}
