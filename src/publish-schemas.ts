@@ -1,4 +1,4 @@
-import { ConfluentRegistry, Manager, ProtobufParser } from '@charlescol/schema-manager';
+import { AvroParser, ConfluentRegistry, Manager, ProtobufParser } from '@charlescol/schema-manager';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 
@@ -16,20 +16,20 @@ async function main() {
   const protobufLoader = new Manager({
     schemaRegistry: registry,
     parser: new ProtobufParser(),
-  }).loadAll(baseDirectory, subjectBuilder);
+  }).loadAll(baseDirectory + '/protobuf', subjectBuilder);
 
   // create a manager and load all avro schemas
   const avroLoader = new Manager({
     schemaRegistry: registry,
-    parser: new ProtobufParser(),
-  }).loadAll(baseDirectory, subjectBuilder);
+    parser: new AvroParser(),
+  }).loadAll(baseDirectory + '/avro', subjectBuilder);
 
   await Promise.all([protobufLoader, avroLoader]);
 }
 
 function subjectBuilder(fullVersionPath: string, filepath: string): string {
   // Extract topic and version
-  const [_, topic, version] = fullVersionPath.split('/');
+  const [topic, version] = fullVersionPath.split('/');
   // Extract the filename without extension
   const filename = filepath.split('/').pop()?.split('.')[0] || '';
   // Return the constructed subject
