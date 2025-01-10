@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-package topic1;
-
 import "data.proto";
 
 // Message that uses Data from v1/data.proto

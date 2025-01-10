@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-package topic1;
-
 // Message defining some basic data structure for v1 of topic1
 message Data {
   string id = 1;

@@ -1,17 +1,16 @@
 {
   "name": "schemas-registry",
-  "version": "1.0.1",
+  "version": "0.0.1",
   "main": "index.js",
   "repository": "git@github.com:QuantaPred/schemas-registry.git",
   "author": "charlescol <charlescol@hotmail.fr>",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "publish-schemas": "yarn build && node dist/publish-schemas.js",
-    "clean": "rm -rf dist"
+    "publish-schemas": "yarn build && node dist/publish-schemas.js"
   },
   "dependencies": {
-    "@charlescol/schema-manager": "^1.0.4",
+    "@charlescol/schema-manager": "^1.0.7",
     "dotenv": "^16.4.5"
   },
   "devDependencies": {

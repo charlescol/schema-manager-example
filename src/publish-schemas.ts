@@ -1,42 +1,47 @@
-import { AvroParser, ConfluentRegistry, Manager, ProtobufParser } from '@charlescol/schema-manager';
+import { ConfigType, ConfluentRegistry, Manager } from '@charlescol/schema-manager';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 
 dotenv.config();
 
-const baseDirectory = path.resolve(__dirname, '../schemas');
-const SCHEMA_REGISTRY_URL = process.env.SCHEMA_REGISTRY_URL || 'https://your-schema-registry-url';
+(async () => {
+  const SCHEMA_REGISTRY_URL = process.env.SCHEMA_REGISTRY_URL || 'http://localhost:8081';
+  const SCHEMA_DIR = path.resolve(__dirname, '../schemas');
 
-const registry = new ConfluentRegistry({
-  schemaRegistryUrl: SCHEMA_REGISTRY_URL,
-});
+  const registry = new ConfluentRegistry({
+    schemaRegistryUrl: SCHEMA_REGISTRY_URL,
+  });
 
-async function main() {
-  // create a manager and load all protobuf schemas
-  const protobufLoader = new Manager({
+  const avroManager = new Manager({
     schemaRegistry: registry,
-    parser: new ProtobufParser(),
-  }).loadAll(baseDirectory + '/protobuf', subjectBuilder);
+    configType: ConfigType.AVRO,
+    namespaceBuilder,
+  });
 
-  // create a manager and load all avro schemas
-  const avroLoader = new Manager({
+  const protoManager = new Manager({
     schemaRegistry: registry,
-    parser: new AvroParser(),
-  }).loadAll(baseDirectory + '/avro', subjectBuilder);
+    configType: ConfigType.PROTOBUF,
+    namespaceBuilder,
+  });
+  /* Build and register both proto and avro schemas */
+  await avroManager.build(`${SCHEMA_DIR}/avro`, 'build-avro');
+  await protoManager.build(`${SCHEMA_DIR}/proto`, 'build-proto');
+  await protoManager.register(subjectBuilder, 'build-proto', 'subjects-proto');
+  await avroManager.register(subjectBuilder, 'build-avro', 'subjects-avro');
+})();
 
-  await Promise.all([protobufLoader, avroLoader]);
+// Function to provide, used to build the subject for each schema file.
+function subjectBuilder(filepath: string): string {
+  const [topic, version, filename] = filepath.split('/'); // Extract topic and version
+  const filenameWithoutExt = filename?.split('.')[0] || ''; // Extract the filename without extension
+  return `${topic}.${filenameWithoutExt}.${version}`; // Return the constructed subject
 }
 
-function subjectBuilder(fullVersionPath: string, filepath: string): string {
-  // Extract topic and version
-  const [topic, version] = fullVersionPath.split('/');
-  // Extract the filename without extension
-  const filename = filepath.split('/').pop()?.split('.')[0] || '';
-  // Return the constructed subject
-  return `${topic}.${filename}.${version}`;
+function namespaceBuilder(filepath: string): string {
+  return filepath
+    .split('/') // Split the string by '/'
+    .map(
+      (segment) => segment.replace(/-([a-z])/g, (_, char) => char.toUpperCase()), // Replace '-' and capitalize the next character
+    )
+    .join('.'); // Join the segments with '.'
 }
-
-main().catch((error) => {
-  console.error('Error registering schemas:', error);
-  process.exit(1);
-});
