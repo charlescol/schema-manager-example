@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@charlescol/schema-manager@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@charlescol/schema-manager/-/schema-manager-1.0.7.tgz#0b5c265698cd581b94d87454bea4a386a8104128"
-  integrity sha512-UvL+JCaM9TyV0lfczT5I8xWk/qthyJ34fsAwwf7Z38m5UbBa9BE1ZmUMfEa+YJE4rMHB6p+tW3gm+Q8uRDiILw==
+"@charlescol/schema-manager@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@charlescol/schema-manager/-/schema-manager-1.0.8.tgz#531a4fcdce332bc74a9e62b252ef548468532349"
+  integrity sha512-uaUAZlW9UZqQiDEEgQMTjzpoMv6hng4xaWp1UDjTXHWc3TCx1frNV2vt9mzuzrhk0dQSnuYsDN6n6nT1c1qH9w==
   dependencies:
     avsc "^5.7.7"
     axios "^1.7.7"

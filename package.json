@@ -10,7 +10,7 @@
     "publish-schemas": "yarn build && node dist/publish-schemas.js"
   },
   "dependencies": {
-    "@charlescol/schema-manager": "^1.0.7",
+    "@charlescol/schema-manager": "^1.0.8",
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
