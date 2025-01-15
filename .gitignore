@@ -53,3 +53,7 @@ Thumbs.db
 *.wmv
 
 subjects.txt
+subjects-proto.txt
+subjects-avro.txt
+build-proto/*
+build-avro/*

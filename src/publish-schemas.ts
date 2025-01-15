@@ -26,8 +26,8 @@ dotenv.config();
   /* Build and register both proto and avro schemas */
   await avroManager.build(`${SCHEMA_DIR}/avro`, 'build-avro');
   await protoManager.build(`${SCHEMA_DIR}/proto`, 'build-proto');
-  await protoManager.register(subjectBuilder, 'build-proto', 'subjects-proto');
-  await avroManager.register(subjectBuilder, 'build-avro', 'subjects-avro');
+  await protoManager.register(subjectBuilder, 'build-proto', 'subjects-proto.txt');
+  await avroManager.register(subjectBuilder, 'build-avro', 'subjects-avro.txt');
 })();
 
 // Function to provide, used to build the subject for each schema file.
