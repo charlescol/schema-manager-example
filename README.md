@@ -20,7 +20,7 @@ This example shows how to use the schema manager to publish schemas to a schema 
 4. Run `yarn publish-schemas` to publish **ALL** the schemas to the schema registry
 
 **Result:**
-Build folders are created in the root: `build-avro`, `build-proto`, `build-json`.
+Build folders are created in the root: `build-avro`, `build-proto`, `build-json`.  
 Subject files are created in the root: `subjects-avro.txt`, `subjects-proto.txt`, `subjects-json.txt`.
 
 You can use these files for subsequent actions in your CI/CD pipeline (such as generating code in your target languages).
