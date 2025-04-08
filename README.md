@@ -2,7 +2,7 @@
 
 This example shows how to use the schema manager to publish schemas to a schema registry. It uses the Confluent schema registry and the schema manager library.
 
-- All the schemas are stored in the `schemas` folder, it contains the folders for **Protobuf**, **Json** and **Avro** schemas.
+- All the schemas are stored in the `schemas` folder, it contains **Protobuf**, **Json** and **Avro** schemas with interdependencies.
 - The repo contains a github action that publishes **ALL** the schemas to the schema registry on every change on the `schemas` folder.
 
 ## Prerequisites
