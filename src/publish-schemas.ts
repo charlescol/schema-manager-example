@@ -23,11 +23,19 @@ dotenv.config();
     configType: ConfigType.PROTOBUF,
     namespaceBuilder,
   });
+
+  const jsonManager = new Manager({
+    schemaRegistry: registry,
+    configType: ConfigType.JSON,
+    namespaceBuilder,
+  });
   /* Build and register both proto and avro schemas */
   await avroManager.build(`${SCHEMA_DIR}/avro`, 'build-avro');
   await protoManager.build(`${SCHEMA_DIR}/proto`, 'build-proto');
+  await jsonManager.build(`${SCHEMA_DIR}/json`, 'build-json');
   await protoManager.register(subjectBuilder, 'build-proto', 'subjects-proto.txt');
   await avroManager.register(subjectBuilder, 'build-avro', 'subjects-avro.txt');
+  await jsonManager.register(subjectBuilder, 'build-json', 'subjects-json.txt');
 })();
 
 // Function to provide, used to build the subject for each schema file.
