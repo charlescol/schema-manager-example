@@ -24,6 +24,7 @@ Result:
 ```bash
 Schema build completed successfully
 Schema build completed successfully
+Schema build completed successfully
 Registered schema for topic1-proto.data.v1
 Registered schema for topic1-proto.entity.v2
 Registered schema for topic2-proto.data2.v1
@@ -35,4 +36,9 @@ Registered schema for topic1-avro.entity.test2
 Registered schema for topic1-avro.data.v1
 Registered schema for topic2-avro.data2.v1
 Registered schema for topic1-avro.model.test2
+Registered schema for topic1-json.data.v1
+Registered schema for topic1-json.entity.v2
+Registered schema for topic1-json.model.v1
+Registered schema for topic1-json.data.v2
+Registered schema for topic1-json.model.v2
 ```
