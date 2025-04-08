@@ -19,7 +19,13 @@ This example shows how to use the schema manager to publish schemas to a schema 
 3. Run `docker compose up` to start the Kafka broker and the schema registry
 4. Run `yarn publish-schemas` to publish **ALL** the schemas to the schema registry
 
-Result:
+**Result:**
+Build folders are created in the root: `build-avro`, `build-proto`, `build-json`.
+Subject files are created in the root: `subjects-avro.txt`, `subjects-proto.txt`, `subjects-json.txt`.
+
+You can use these files for subsequent actions in your CI/CD pipeline (such as generating code in your target languages).
+
+**Console output:**
 
 ```bash
 Schema build completed successfully
